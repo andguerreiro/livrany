@@ -1,4 +1,4 @@
-# [Livrani](https://livrani.github.io)
+# [Livrani](https://andguerreiro.gitlab.io/livrani)
 
 Pesquise preços de livros em sites selecionados
 
