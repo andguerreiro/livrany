@@ -2,7 +2,7 @@
 
 Pesquise preços de livros em sites selecionados
 
-Criado e atualizado por A. M. Guerreiro, livreiro do [sebomelivro.com](https://sebomelivro.com)
+Criado e atualizado por A.M. Guerreiro, livreiro do [sebomelivro.com](https://sebomelivro.com)
 
 Logo criado por Pixel perfect e baixado de [flaticon.com](https://flaticon.com)
 
