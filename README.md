@@ -6,4 +6,4 @@ Criado e atualizado por Andrews Guerreiro, livreiro do [sebomelivro.com](https:/
 
 Logo criado por Pixel perfect e baixado de [flaticon.com](https://flaticon.com)
 
-[amguerreiro.gitlab.io/livrani](https://amguerreiro.gitlab.io/livrani)
+[andguerreiro.github.io/livrani](https://andguerreiro.github.io/livrani)
