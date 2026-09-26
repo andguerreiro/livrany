@@ -14,94 +14,235 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-color: #f4f4f9;
+  --card-bg: #ffffff;
+  --text-color: #222222;
+  --muted-color: #555555;
+  --border-color: #dddddd;
+  --header-bg: #000000;
+  --header-text: #ffffff;
+  --accent-color: #000000;
+  --accent-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #181818;
+    --card-bg: #262626;
+    --text-color: #f0f0f0;
+    --muted-color: #b5b5b5;
+    --border-color: #444444;
+    --header-bg: #000000;
+    --header-text: #ffffff;
+    --accent-color: #f0f0f0;
+    --accent-text: #111111;
+  }
+}
+
 /* Global Styles */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: white;
-  color: black;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
-  color: black;
+  color: var(--text-color);
   text-decoration: underline;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #333; 
-    color: white; 
-  }
 }
 
 /* Header Styles */
 header {
   text-align: center;
-  background-color: black;
-  padding: 20px 0;
-  color: white;
+  background-color: var(--header-bg);
+  padding: 30px 20px;
+  color: var(--header-text);
+}
+
+header img {
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+  margin-bottom: 10px;
 }
 
 header h1 {
-  font-size: 36px;
+  font-size: 32px;
+  letter-spacing: 0.5px;
+}
+
+header p {
+  margin-top: 6px;
+  font-size: 15px;
+  color: #dddddd;
+}
+
+/* Main content grows to push footer down */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 
 /* Search Form Styles */
 .search-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 480px;
+  width: 100%;
+  background-color: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   text-align: center;
+  margin-top: -30px;
 }
 
-select, input, button {
-  margin: 10px 0;
+label {
+  display: block;
+  text-align: left;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--muted-color);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+label:first-of-type {
+  margin-top: 0;
+}
+
+select, input {
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 7px;
   width: 100%;
   box-sizing: border-box;
   outline: none;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+select:focus, input:focus {
+  border-color: var(--accent-color);
+}
+
+.botoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
 }
 
 button {
-  background-color: black;
-  color: white;
-  border: none;
-  width: 120px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 7px;
   cursor: pointer;
-  margin: 0 auto;
+  flex: 1;
+}
+
+button[type="submit"] {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  border: none;
+  font-weight: bold;
+}
+
+button[type="submit"]:hover {
+  opacity: 0.85;
+}
+
+button[type="reset"] {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+button[type="reset"]:hover {
+  background-color: var(--bg-color);
+}
+
+/* Rodapé */
+.rodape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 18px 20px;
+  font-size: 0.85em;
+  color: var(--muted-color);
+}
+
+.rodape a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.rodape a:hover {
+  color: var(--muted-color);
+  text-decoration: underline;
+}
+
+.rodape svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 </style>
 </head>
 <body>
 <header>
-  <img src="logo.png" height="128px" width="128px" alt="Logo">
+  <img src="logo.png" alt="Logo Livrany">
   <h1>Livrany</h1>
   <p>Encontre os melhores preços de livros em sites selecionados.</p>
 </header>
-<div class="search-form">
-  <form name="searchform" onSubmit="return dosearch();">
-    <select name="sites">
-      <option value="https://sebomenostelas.com.br/?q=">Sebo Menos Telas</option>
-      <option value="https://www.estantevirtual.com.br/busca?nsCat=Natural&searchField=titulo-autor&sort=lowest-first&q=">Estante Virtual</option>
-      <option value="https://www.amazon.com.br/s?i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&ref=nb_sb_noss&k=">Amazon Brasil</option>
-      <option value="https://livros.mercadolivre.com.br/">Mercado Livre</option>
-      <option value="https://shopee.com.br/search?category=26820&order=asc&page=0&sortBy=price&keyword=">Shopee</option>
-      <option value="https://www.enjoei.com.br/s?ref=products_search&d=etc-tal&sr=near_regions&o=low_price&q=">Enjoei</option>
-      <option value="https://www.google.com/search?hl=pt-BR&tbm=shop&q=">Google Shopping</option>
-    </select>
-    <input type="search" name="searchterms" placeholder="Digite um título ou autor..." autofocus>
-    <button type="submit">Buscar</button>
-    <button type="reset">Limpar</button>
-  </form>
+
+<main>
+  <div class="search-form">
+    <form name="searchform" onSubmit="return dosearch();">
+      <label for="sites">Site</label>
+      <select name="sites" id="sites">
+        <option value="https://sebomenostelas.com.br/?q=">Sebo Menos Telas</option>
+        <option value="https://www.estantevirtual.com.br/busca?nsCat=Natural&searchField=titulo-autor&sort=lowest-first&q=">Estante Virtual</option>
+        <option value="https://www.amazon.com.br/s?i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&ref=nb_sb_noss&k=">Amazon Brasil</option>
+        <option value="https://livros.mercadolivre.com.br/">Mercado Livre</option>
+        <option value="https://www.enjoei.com.br/s?ref=products_search&d=etc-tal&sr=near_regions&o=low_price&q=">Enjoei</option>
+        <option value="https://www.google.com/search?hl=pt-BR&tbm=shop&q=">Google Shopping</option>
+      </select>
+
+      <label for="searchterms">Título ou autor</label>
+      <input type="search" id="searchterms" name="searchterms" placeholder="Digite um título ou autor..." autofocus>
+
+      <div class="botoes">
+        <button type="submit">Buscar</button>
+        <button type="reset">Limpar</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<div class="rodape">
+  <a href="https://github.com/andguerreiro/livrany" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+    </svg>
+    Código aberto no GitHub
+  </a>
 </div>
 
 <script type="text/javascript">
   function dosearch() {
     var sf = document.searchform;
-    var submitto = sf.sites.options[sf.sites.selectedIndex].value + sf.searchterms.value;
+    var submitto = sf.sites.options[sf.sites.selectedIndex].value + encodeURIComponent(sf.searchterms.value);
     window.open(submitto);
     return false;
   }
