@@ -5,226 +5,292 @@
 <title>Livrany - Pesquise Preços de Livros em Sites Selecionados</title>
 <meta name="description" content="Pesquise Preços de Livros em Sites Selecionados">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="logo.png" />
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
 <style>
-/* Reset CSS */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg-color: #f4f4f9;
-  --card-bg: #ffffff;
-  --text-color: #222222;
-  --muted-color: #555555;
-  --border-color: #dddddd;
-  --header-bg: #000000;
-  --header-text: #ffffff;
-  --accent-color: #000000;
-  --accent-text: #ffffff;
+  --bg: #f6f5f1;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #5d5d73;
+  --border: #dcdbd3;
+  --hero: #1b2559;
+  --hero-text: #ffffff;
+  --hero-muted: #b9c0e6;
+  --accent: #f2b705;
+  --accent-text: #1a1a2e;
+  --chip-on: #1b2559;
+  --chip-on-text: #ffffff;
+  --focus: #3a54d6;
+  --font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #181818;
-    --card-bg: #262626;
-    --text-color: #f0f0f0;
-    --muted-color: #b5b5b5;
-    --border-color: #444444;
-    --header-bg: #000000;
-    --header-text: #ffffff;
-    --accent-color: #f0f0f0;
-    --accent-text: #111111;
+    --bg: #14141c;
+    --card: #1f1f2b;
+    --text: #f1f1f6;
+    --muted: #a6a6bb;
+    --border: #3a3a4d;
+    --hero: #0e1331;
+    --chip-on: #f2b705;
+    --chip-on-text: #1a1a2e;
+    --focus: #8fa2ff;
   }
 }
 
-/* Global Styles */
+html { height: 100%; }
+
 body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+  font-family: var(--font);
+  line-height: 1.55;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-a {
-  color: var(--text-color);
-  text-decoration: underline;
-}
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
-/* Header Styles */
+/* Hero */
 header {
-  text-align: center;
-  background-color: var(--header-bg);
-  padding: 30px 20px;
-  color: var(--header-text);
+  background: var(--hero);
+  color: var(--hero-text);
+  padding: clamp(32px, 7vw, 72px) 20px clamp(72px, 12vw, 120px);
+}
+
+.hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 4vw, 32px);
 }
 
 header img {
-  width: 96px;
-  height: 96px;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  width: clamp(72px, 14vw, 112px);
+  height: clamp(72px, 14vw, 112px);
+  border-radius: 20px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 header h1 {
-  font-size: 32px;
-  letter-spacing: 0.5px;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
 header p {
-  margin-top: 6px;
-  font-size: 15px;
-  color: #dddddd;
+  margin-top: 8px;
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  color: var(--hero-muted);
+  max-width: 34ch;
 }
 
-/* Main content grows to push footer down */
+/* Search card overlapping hero */
 main {
   flex: 1;
+  padding: 0 20px 40px;
+}
+
+.search-card {
+  max-width: 760px;
+  margin: -56px auto 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: clamp(20px, 4vw, 32px);
+  box-shadow: 0 18px 40px -16px rgba(10, 15, 50, 0.35);
+}
+
+.field-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+input[type="search"] {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 1.1rem;
+  padding: 14px 16px;
+  color: var(--text);
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+}
+
+input[type="search"]::placeholder { color: var(--muted); }
+input[type="search"]:focus { outline: none; border-color: var(--focus); }
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.05rem;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 14px 24px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+  border: 2px solid var(--accent);
+}
+
+.btn-primary:hover { filter: brightness(0.95); }
+.btn-primary:active { transform: translateY(1px); }
+
+/* Site chips */
+fieldset { border: 0; min-width: 0; }
+
+legend {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chip span {
+  display: inline-block;
+  padding: 9px 16px;
+  font-size: 0.95rem;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.chip span:hover { border-color: var(--muted); }
+
+.chip input:checked + span {
+  background: var(--chip-on);
+  border-color: var(--chip-on);
+  color: var(--chip-on-text);
+  font-weight: 600;
+}
+
+.chip input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.card-footer {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.btn-ghost {
+  font: inherit;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 6px 4px;
+}
+
+.btn-ghost:hover { color: var(--text); }
+
+/* Footer */
+.rodape {
   display: flex;
   justify-content: center;
   padding: 20px;
-}
-
-/* Search Form Styles */
-.search-form {
-  max-width: 480px;
-  width: 100%;
-  background-color: var(--card-bg);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-  text-align: center;
-  margin-top: -30px;
-}
-
-label {
-  display: block;
-  text-align: left;
-  font-size: 13px;
-  font-weight: bold;
-  color: var(--muted-color);
-  margin-bottom: 6px;
-  margin-top: 14px;
-}
-
-label:first-of-type {
-  margin-top: 0;
-}
-
-select, input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 7px;
-  width: 100%;
-  box-sizing: border-box;
-  outline: none;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-select:focus, input:focus {
-  border-color: var(--accent-color);
-}
-
-.botoes {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-button {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 7px;
-  cursor: pointer;
-  flex: 1;
-}
-
-button[type="submit"] {
-  background-color: var(--accent-color);
-  color: var(--accent-text);
-  border: none;
-  font-weight: bold;
-}
-
-button[type="submit"]:hover {
-  opacity: 0.85;
-}
-
-button[type="reset"] {
-  background-color: transparent;
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-}
-
-button[type="reset"]:hover {
-  background-color: var(--bg-color);
-}
-
-/* Rodapé */
-.rodape {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 18px 20px;
-  font-size: 0.85em;
-  color: var(--muted-color);
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
 }
 
 .rodape a {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: var(--text-color);
+  gap: 8px;
+  color: var(--text);
+  font-weight: 600;
   text-decoration: none;
-  font-weight: bold;
 }
 
-.rodape a:hover {
-  color: var(--muted-color);
-  text-decoration: underline;
-}
+.rodape a:hover { text-decoration: underline; }
+.rodape svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-.rodape svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
+@media (max-width: 520px) {
+  .hero-inner { flex-direction: column; align-items: flex-start; }
+  .search-row { flex-direction: column; }
+  .btn-primary { width: 100%; }
+  .card-footer { flex-direction: column; align-items: flex-start; }
 }
 </style>
 </head>
 <body>
 <header>
-  <img src="logo.png" alt="Logo Livrany">
-  <h1>Livrany</h1>
-  <p>Encontre os melhores preços de livros em sites selecionados.</p>
+  <div class="hero-inner">
+    <img src="logo.png" alt="Logo Livrany">
+    <div>
+      <h1>Livrany</h1>
+      <p>Encontre os melhores preços de livros em sites selecionados.</p>
+    </div>
+  </div>
 </header>
 
 <main>
-  <div class="search-form">
-    <form name="searchform" onSubmit="return dosearch();">
-      <label for="sites">Site</label>
-      <select name="sites" id="sites">
-        <option value="https://sebomenostelas.com.br/?q=">Sebo Menos Telas</option>
-        <option value="https://www.estantevirtual.com.br/busca?nsCat=Natural&searchField=titulo-autor&sort=lowest-first&q=">Estante Virtual</option>
-        <option value="https://www.amazon.com.br/s?i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&ref=nb_sb_noss&k=">Amazon Brasil</option>
-        <option value="https://livros.mercadolivre.com.br/">Mercado Livre</option>
-        <option value="https://www.enjoei.com.br/s?ref=products_search&d=etc-tal&sr=near_regions&o=low_price&q=">Enjoei</option>
-        <option value="https://www.google.com/search?hl=pt-BR&tbm=shop&q=">Google Shopping</option>
-      </select>
+  <div class="search-card">
+    <form name="searchform" onsubmit="return dosearch();">
+      <label class="field-label" for="searchterms">Título ou autor</label>
+      <div class="search-row">
+        <input type="search" id="searchterms" name="searchterms" placeholder="Ex.: Dom Casmurro, Machado de Assis" autofocus autocomplete="off">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </div>
 
-      <label for="searchterms">Título ou autor</label>
-      <input type="search" id="searchterms" name="searchterms" placeholder="Digite um título ou autor..." autofocus>
+      <fieldset>
+        <legend>Onde buscar</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="sites" value="https://sebomenostelas.com.br/?q=" checked><span>Sebo Menos Telas</span></label>
+          <label class="chip"><input type="radio" name="sites" value="https://www.estantevirtual.com.br/busca?nsCat=Natural&searchField=titulo-autor&sort=lowest-first&q="><span>Estante Virtual</span></label>
+          <label class="chip"><input type="radio" name="sites" value="https://www.amazon.com.br/s?i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&ref=nb_sb_noss&k="><span>Amazon Brasil</span></label>
+          <label class="chip"><input type="radio" name="sites" value="https://livros.mercadolivre.com.br/"><span>Mercado Livre</span></label>
+          <label class="chip"><input type="radio" name="sites" value="https://www.enjoei.com.br/s?ref=products_search&d=etc-tal&sr=near_regions&o=low_price&q="><span>Enjoei</span></label>
+          <label class="chip"><input type="radio" name="sites" value="https://www.google.com/search?hl=pt-BR&tbm=shop&q="><span>Google Shopping</span></label>
+        </div>
+      </fieldset>
 
-      <div class="botoes">
-        <button type="submit">Buscar</button>
-        <button type="reset">Limpar</button>
+      <div class="card-footer">
+        <span>A busca abre em uma nova aba.</span>
+        <button type="reset" class="btn-ghost">Limpar busca</button>
       </div>
     </form>
   </div>
@@ -239,11 +305,11 @@ button[type="reset"]:hover {
   </a>
 </div>
 
-<script type="text/javascript">
+<script>
   function dosearch() {
     var sf = document.searchform;
-    var submitto = sf.sites.options[sf.sites.selectedIndex].value + encodeURIComponent(sf.searchterms.value);
-    window.open(submitto);
+    var site = sf.querySelector('input[name="sites"]:checked').value;
+    window.open(site + encodeURIComponent(sf.searchterms.value.trim()), '_blank');
     return false;
   }
 </script>
